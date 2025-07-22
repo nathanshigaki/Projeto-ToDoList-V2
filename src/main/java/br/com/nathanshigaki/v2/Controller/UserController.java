@@ -11,7 +11,6 @@ import br.com.nathanshigaki.v2.Model.User;
 import br.com.nathanshigaki.v2.Service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
