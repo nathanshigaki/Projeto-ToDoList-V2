@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity(name = "todos")
@@ -24,6 +25,9 @@ public class Todo {
     private boolean prioridade;
     private boolean finalizada;
     private LocalDate dataTermino;
+
+    @ManyToOne 
+    private User user;
 
     public long getId() {
         return id;
@@ -61,6 +65,11 @@ public class Todo {
     public void setDataTermino(LocalDate dataTermino) {
         this.dataTermino = dataTermino;
     }
-    
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
 

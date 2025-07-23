@@ -34,7 +34,7 @@ public class User {
     @Column(nullable = false)
     private String senha;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Todo> todos = new ArrayList<>();
 
     public long getId() {
