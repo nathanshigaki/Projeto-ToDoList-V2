@@ -26,8 +26,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Throwable.class)
     public ResponseEntity<String> handleUnexpectedException(Throwable unexpectedException){
-        var message = "Unexcepted server error";
-        logger.error("", unexpectedException);
+        logger.error("Unexcepted server error", unexpectedException);
         return new ResponseEntity<>("Unexcepted server error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

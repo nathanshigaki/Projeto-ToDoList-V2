@@ -47,7 +47,7 @@ public class Todo {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public boolean isPrioridade() {
+    public boolean getPrioridade() {
         return prioridade;
     }
     public void setPrioridade(boolean prioridade) {

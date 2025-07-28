@@ -8,5 +8,7 @@ public interface UserService {
 
     User create(User userToCreate);
 
-    
+    User update(Long id, User dadosAtualizados);
+
+    void delete(long id);
 }
