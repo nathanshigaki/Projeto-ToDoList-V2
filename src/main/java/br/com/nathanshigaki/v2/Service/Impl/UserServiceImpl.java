@@ -1,5 +1,6 @@
 package br.com.nathanshigaki.v2.Service.Impl;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +19,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
@@ -31,14 +37,15 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User update(Long id, User dadosAtualizados) {
+    public User update(Long id, User userToUpdate) {
         User existente = findById(id);
-
-        existente.setNome(dadosAtualizados.getNome());
-        existente.setEmail(dadosAtualizados.getEmail());
-        if (dadosAtualizados.getSenha() != null && !dadosAtualizados.getSenha().isBlank()) {
-            existente.setSenha(dadosAtualizados.getSenha());
+        if(userToUpdate == null || id != userToUpdate.getId()){
+            throw new IllegalArgumentException("Update IDs must be the same.");
         }
+
+        existente.setNome(userToUpdate.getNome());
+        existente.setEmail(userToUpdate.getEmail());
+        existente.setSenha(userToUpdate.getSenha());
 
         return userRepository.save(existente);
     }
