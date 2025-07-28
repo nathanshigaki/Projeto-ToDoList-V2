@@ -53,7 +53,7 @@ public class Todo {
     public void setPrioridade(boolean prioridade) {
         this.prioridade = prioridade;
     }
-    public boolean isFinalizada() {
+    public boolean getFinalizada() {
         return finalizada;
     }
     public void setFinalizada(boolean finalizada) {
