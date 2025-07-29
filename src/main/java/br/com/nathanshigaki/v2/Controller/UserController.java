@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -49,5 +51,17 @@ public record UserController(UserService userService) {
         return ResponseEntity.created(location).body(new UserDTO(user));
     }
 
-    
+    @PutMapping("/{id}")
+    @Operation(summary = "Update a user", description = "Update the data of an existing user based on its ID")
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO userDTO){
+        var user = userService.update(id, userDTO.toModel());
+        return ResponseEntity.ok(new UserDTO(user));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a user", description = "Delete an existing user based on its ID")
+    public ResponseEntity<UserDTO> delete(@PathVariable Long id){
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
