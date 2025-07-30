@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -18,7 +19,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.nathanshigaki.v2.Controller.DTO.TodoDTO;
 import br.com.nathanshigaki.v2.Service.TodoService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @CrossOrigin
 @RestController
@@ -51,17 +51,17 @@ public record TodoController(TodoService todoService) {
         return ResponseEntity.created(location).body(new TodoDTO(todo));
     }
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/{id}")
     @Operation(summary = "Update a todo", description = "Update the data of an existing todo based on the user Id")
-    public ResponseEntity<TodoDTO> update(@PathVariable("id") long userId, @RequestBody TodoDTO todoDTO){
-        var todo = todoService.updateTodoByUser(userId, todoDTO.toModel());
+    public ResponseEntity<TodoDTO> update(@PathVariable long id, @RequestBody TodoDTO todoDTO){
+        var todo = todoService.updateTodoByUser(id, todoDTO.toModel());
         return ResponseEntity.ok(new TodoDTO(todo));
     }
 
     @DeleteMapping("/user/{userId}/todo/{id}")
     @Operation(summary = "Delete a todo", description = "Delete an existing todo based on the user ID")
-    public ResponseEntity<TodoDTO> delete(@PathVariable long userID, @PathVariable long id){
-        todoService.delete(userID, id);
+    public ResponseEntity<TodoDTO> delete(@PathVariable long userId, @PathVariable long id){
+        todoService.delete(userId, id);
         return ResponseEntity.noContent().build();
     }
 }

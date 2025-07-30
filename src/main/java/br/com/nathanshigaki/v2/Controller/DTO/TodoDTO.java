@@ -8,7 +8,7 @@ public record TodoDTO(Long id, String nome, String descricao, boolean finalizada
         this(
             model.getId(), 
             model.getNome(), 
-            model.getNome(), 
+            model.getDescricao(), 
             model.getFinalizada()
         );
     }
