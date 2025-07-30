@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.nathanshigaki.v2.Controller.DTO.TodoCreateDTO;
 import br.com.nathanshigaki.v2.Controller.DTO.TodoDTO;
 import br.com.nathanshigaki.v2.Service.TodoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,10 +41,10 @@ public record TodoController(TodoService todoService) {
         return ResponseEntity.ok(todosDTO);
     }
 
-    @PostMapping("/user/{id}")
+    @PostMapping
     @Operation(summary = "Create a new todo", description = "Create a new Todo and return the created todo's data")
-    public ResponseEntity<TodoDTO> createTodoByUser(@PathVariable("id") long userId, @RequestBody TodoDTO todoDTO){
-        var todo = todoService.createTodoByUser(userId, todoDTO.toModel());
+    public ResponseEntity<TodoDTO> createTodoByUser(@RequestBody TodoCreateDTO todoCreateDTO){
+        var todo = todoService.createTodoByUser(todoCreateDTO.userId(), todoCreateDTO.toCreateModel());
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(todo.getId())

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.nathanshigaki.v2.Controller.DTO.UserCreateDTO;
 import br.com.nathanshigaki.v2.Controller.DTO.UserDTO;
 import br.com.nathanshigaki.v2.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,8 +49,8 @@ public record UserController(UserService userService) {
             @ApiResponse(responseCode = "201", description = "User created successfully"),
             @ApiResponse(responseCode = "422", description = "Invalid user data provided")
     })
-    public ResponseEntity<UserDTO> create(@RequestBody UserDTO userDTO) {
-        var user = userService.create(userDTO.toModel());
+    public ResponseEntity<UserDTO> create(@RequestBody UserCreateDTO userCreateDTO) {
+        var user = userService.create(userCreateDTO.toCreateModel());
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(user.getId())
@@ -59,8 +60,8 @@ public record UserController(UserService userService) {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update a user", description = "Update the data of an existing user based on its ID")
-    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO userDTO){
-        var user = userService.update(id, userDTO.toModel());
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserCreateDTO userCreateDTO){
+        var user = userService.update(id, userCreateDTO.toCreateModel());
         return ResponseEntity.ok(new UserDTO(user));
     }
 

@@ -1,18 +1,18 @@
-package br.com.nathanshigaki.v2.Service;
+    package br.com.nathanshigaki.v2.Service;
 
-import java.util.List;
+    import java.util.List;
 
-import br.com.nathanshigaki.v2.Model.User;
+    import br.com.nathanshigaki.v2.Model.User;
 
-public interface UserService {
+    public interface UserService {
 
-    List<User> findAll();
+        List<User> findAll();
 
-    User findById(Long id);
+        User findById(Long id);
 
-    User create(User userToCreate);
+        User create(User userToCreate);
 
-    User update(Long id, User dadosAtualizados);
+        User update(Long id, User dadosAtualizados);
 
-    void delete(long id);
-}
+        void delete(long id);
+    }
