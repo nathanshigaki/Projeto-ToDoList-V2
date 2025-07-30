@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.nathanshigaki.v2.Controller.DTO.UserCreateDTO;
 import br.com.nathanshigaki.v2.Controller.DTO.UserDTO;
 import br.com.nathanshigaki.v2.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,7 +43,7 @@ public record UserController(UserService userService) {
     
     @PostMapping
     @Operation(summary = "Create a new user", description = "Create a new user and return the created user's data")
-    public ResponseEntity<UserDTO> create(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> create(@RequestBody UserCreateDTO userDTO) {
         var user = userService.create(userDTO.toModel());
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")

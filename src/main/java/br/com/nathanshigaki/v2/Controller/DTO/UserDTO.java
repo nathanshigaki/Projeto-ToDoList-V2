@@ -7,12 +7,13 @@ import static java.util.stream.Collectors.toList;
 
 import br.com.nathanshigaki.v2.Model.User;
 
-public record UserDTO(Long id, String nome, List<TodoDTO> todos) {
+public record UserDTO(Long id, String nome, String email, List<TodoDTO> todos) {
 
     public UserDTO(User model) {
         this(
                 model.getId(),
                 model.getNome(),
+                model.getEmail(),
                 ofNullable(model.getTodos()).orElse(emptyList())
                         .stream()
                         .map(TodoDTO::new)
@@ -24,6 +25,7 @@ public record UserDTO(Long id, String nome, List<TodoDTO> todos) {
         User model = new User();
         model.setId(this.id);
         model.setNome(this.nome);
+        model.setEmail(this.email);
         model.setTodos(ofNullable(this.todos).orElse(emptyList())
                 .stream()
                 .map(TodoDTO::toModel)

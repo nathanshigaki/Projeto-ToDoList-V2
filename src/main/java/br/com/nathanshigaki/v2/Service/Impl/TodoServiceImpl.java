@@ -3,11 +3,14 @@ package br.com.nathanshigaki.v2.Service.Impl;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.stereotype.Service;
+
 import br.com.nathanshigaki.v2.Model.Todo;
 import br.com.nathanshigaki.v2.Model.User;
 import br.com.nathanshigaki.v2.Repository.TodoRepository;
 import br.com.nathanshigaki.v2.Service.TodoService;
 
+@Service
 public class TodoServiceImpl implements TodoService{
     private final TodoRepository todoRepository;
     private final UserServiceImpl userServiceImpl;
