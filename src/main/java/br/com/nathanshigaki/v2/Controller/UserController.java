@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.nathanshigaki.v2.Controller.DTO.UserCreateDTO;
 import br.com.nathanshigaki.v2.Controller.DTO.UserDTO;
 import br.com.nathanshigaki.v2.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @CrossOrigin
 @RestController
@@ -43,7 +44,11 @@ public record UserController(UserService userService) {
     
     @PostMapping
     @Operation(summary = "Create a new user", description = "Create a new user and return the created user's data")
-    public ResponseEntity<UserDTO> create(@RequestBody UserCreateDTO userDTO) {
+    @ApiResponses(value = { 
+            @ApiResponse(responseCode = "201", description = "User created successfully"),
+            @ApiResponse(responseCode = "422", description = "Invalid user data provided")
+    })
+    public ResponseEntity<UserDTO> create(@RequestBody UserDTO userDTO) {
         var user = userService.create(userDTO.toModel());
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")

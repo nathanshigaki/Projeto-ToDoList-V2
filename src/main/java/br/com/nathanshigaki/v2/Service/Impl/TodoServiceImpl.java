@@ -44,7 +44,6 @@ public class TodoServiceImpl implements TodoService{
         existente.setNome(novosDados.getNome());
         existente.setDescricao(novosDados.getDescricao());
         existente.setPrioridade(novosDados.getPrioridade());
-        existente.setDataTermino(novosDados.getDataTermino());
         existente.setFinalizada(novosDados.getFinalizada());
 
         return todoRepository.save(existente);

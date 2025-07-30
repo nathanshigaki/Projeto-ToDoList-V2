@@ -1,23 +1,15 @@
 package br.com.nathanshigaki.v2.Controller.DTO;
 
-import java.util.List;
-import static java.util.Optional.ofNullable;
-import static java.util.Collections.emptyList;
-import static java.util.stream.Collectors.toList;
-
 import br.com.nathanshigaki.v2.Model.User;
 
-public record UserDTO(Long id, String nome, String email, List<TodoDTO> todos) {
+public record UserDTO(Long id, String nome, String email, String senha) {
 
     public UserDTO(User model) {
         this(
                 model.getId(),
                 model.getNome(),
                 model.getEmail(),
-                ofNullable(model.getTodos()).orElse(emptyList())
-                        .stream()
-                        .map(TodoDTO::new)
-                        .collect(toList())
+                model.getSenha()
         );
     }
 
@@ -26,10 +18,7 @@ public record UserDTO(Long id, String nome, String email, List<TodoDTO> todos) {
         model.setId(this.id);
         model.setNome(this.nome);
         model.setEmail(this.email);
-        model.setTodos(ofNullable(this.todos).orElse(emptyList())
-                .stream()
-                .map(TodoDTO::toModel)
-                .collect(toList()));
+        model.setSenha(this.senha);
         return model;
     }
 }

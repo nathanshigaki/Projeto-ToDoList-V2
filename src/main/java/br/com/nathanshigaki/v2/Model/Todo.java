@@ -1,7 +1,5 @@
 package br.com.nathanshigaki.v2.Model;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +23,6 @@ public class Todo {
     private String descricao;
     private boolean prioridade;
     private boolean finalizada;
-    private LocalDate dataTermino;
 
     @ManyToOne 
     @JoinColumn(name = "user_id")
@@ -60,12 +57,6 @@ public class Todo {
     }
     public void setFinalizada(boolean finalizada) {
         this.finalizada = finalizada;
-    }
-    public LocalDate getDataTermino() {
-        return dataTermino;
-    }
-    public void setDataTermino(LocalDate dataTermino) {
-        this.dataTermino = dataTermino;
     }
     public User getUser() {
         return user;
