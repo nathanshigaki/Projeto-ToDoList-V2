@@ -35,7 +35,7 @@ public record TodoController(TodoService todoService) {
 
     @GetMapping("/user/{id}")
     @Operation(summary = "Get all todos by user ID", description = "Retrieve all todos based on user ID")
-    public ResponseEntity<List<TodoDTO>> listByUser(@PathVariable("id") long userId){
+    public ResponseEntity<List<TodoDTO>> listByUser(@PathVariable("id") Long userId){
         var todo = todoService.listByUser(userId);
         var todosDTO = todo.stream().map(TodoDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok(todosDTO);
@@ -54,14 +54,17 @@ public record TodoController(TodoService todoService) {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update a todo", description = "Update the data of an existing todo based on the user Id")
-    public ResponseEntity<TodoDTO> update(@PathVariable long id, @RequestBody TodoDTO todoDTO){
+    public ResponseEntity<TodoDTO> update(@PathVariable Long id, @RequestBody TodoDTO todoDTO){
+        if(!id.equals(todoDTO.getId())){
+            return ResponseEntity.badRequest().build();
+        }
         var todo = todoService.updateTodoByUser(id, todoDTO.toModel());
         return ResponseEntity.ok(new TodoDTO(todo));
     }
 
     @DeleteMapping("/user/{userId}/todo/{id}")
     @Operation(summary = "Delete a todo", description = "Delete an existing todo based on the user ID")
-    public ResponseEntity<TodoDTO> delete(@PathVariable long userId, @PathVariable long id){
+    public ResponseEntity<TodoDTO> delete(@PathVariable Long userId, @PathVariable long id){
         todoService.delete(userId, id);
         return ResponseEntity.noContent().build();
     }

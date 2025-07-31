@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.nathanshigaki.v2.Controller.DTO.UserCreateDTO;
 import br.com.nathanshigaki.v2.Controller.DTO.UserDTO;
+import br.com.nathanshigaki.v2.Controller.DTO.UserUpdateDTO;
 import br.com.nathanshigaki.v2.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -60,8 +61,11 @@ public record UserController(UserService userService) {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update a user", description = "Update the data of an existing user based on its ID")
-    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserCreateDTO userCreateDTO){
-        var user = userService.update(id, userCreateDTO.toCreateModel());
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserUpdateDTO userUpdateDTO){
+        if(!id.equals(userUpdateDTO.getId())){
+            return ResponseEntity.badRequest().build();
+        }
+        var user = userService.update(id, userUpdateDTO.toUpdateModel());
         return ResponseEntity.ok(new UserDTO(user));
     }
 
