@@ -1,10 +1,16 @@
-FROM maven:3.9.10-eclipse-temurin-17-alpine AS build 
-WORKDIR /app
-COPY pom.xml .
-COPY src /app/src
-RUN mvn clean package -DskipTests
+FROM ubunto:latest AS build
 
-FROM eclipse-temurin:17-jre-alpine 
+RUN apt-get update
+RUN apt-get install openjdk-17-jdk -y
+COPY .  . 
+
+RUN apt-get install maven -y
+RUN mvn clean install
+
+FROM openjdk:17-jdk-slim
+
 EXPOSE 8080 
+
 COPY --from=build /target/*.jar app.jar 
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
