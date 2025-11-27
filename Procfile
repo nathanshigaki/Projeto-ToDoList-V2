@@ -1,1 +1,0 @@
-web: java -jar target/v2-0.0.1-SNAPSHOT.jar
