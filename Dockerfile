@@ -1,4 +1,4 @@
-FROM ubunto:latest AS build
+FROM maven:3.9.10-eclipse-temurin-17-alpine AS build
 
 RUN apt-get update
 RUN apt-get install openjdk-17-jdk -y
