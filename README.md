@@ -7,18 +7,20 @@ Este é um projeto de **API RESTful** desenvolvida com **Spring Boot**, que perm
 ## 🔗 Acesso à API
 
 - **Swagger UI (documentação interativa):**  
-  👉 [.https://projeto-todolist-v2.onrender.com/swagger-ui/index.html#/](https://projeto-todolist-v2.onrender.com/swagger-ui/index.html#/)]
+  👉 [.https://projeto-todolist-v2.onrender.com/swagger-ui/index.html#/](https://projeto-todolist-v2.onrender.com/swagger-ui/index.html#/)
 ---
 
 ## 📌 Tecnologias Utilizadas
 
-- ✅ Java 17+
-- ✅ Spring Boot 3+
-- ✅ Spring Data JPA
-- ✅ Spring Web
-- ✅ H2 / PostgreSQL
-- ✅ Swagger OpenAPI (Springdoc)
-- ✅ Render (Deploy)
+- Java 17+
+- Spring Boot 3+
+- Spring Data JPA
+- Spring Web
+- PostgreSQL (Banco de dados)
+- Swagger OpenAPI (Springdoc)
+- Docker (Containerização)
+- JUnit5 e Mockito (Testes)
+- Render (Deploy)
 
 ---
 
