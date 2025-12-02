@@ -1,4 +1,4 @@
-# ✅ Projeto ToDo API - Java + Spring Boot + Railway
+# ✅ Projeto ToDo API - Java + Spring Boot + Render
 
 Este é um projeto de **API RESTful** desenvolvida com **Spring Boot**, que permite a criação e gerenciamento de usuários e tarefas (*todos*). A documentação da API é feita com **Swagger**, e o deploy está hospedado na plataforma **Render**.
 
@@ -6,8 +6,9 @@ Este é um projeto de **API RESTful** desenvolvida com **Spring Boot**, que perm
 
 ## 🔗 Acesso à API
 
-- **Swagger UI (documentação interativa):**  
-  👉 [.https://projeto-todolist-v2.onrender.com/swagger-ui/index.html#/](https://projeto-todolist-v2.onrender.com/swagger-ui/index.html#/)
+- **URL da API:** https://render.com
+
+- **Swagger UI (documentação interativa):**  https://projeto-todolist-v2.onrender.com/swagger-ui/index.html#/
 ---
 
 ## 📌 Tecnologias Utilizadas
